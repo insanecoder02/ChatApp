@@ -19,8 +19,9 @@ class Login : AppCompatActivity() {
 
         binding.logButton.setOnClickListener {
             login(
-                binding.editEmail.toString(), binding.editPass.toString()
+                binding.editEmail.text.toString(), binding.editPass.text.toString()
             )
+
         }
         binding.signButton.setOnClickListener {
             startActivity(Intent(this, SignUp::class.java))

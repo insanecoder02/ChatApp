@@ -20,7 +20,7 @@
         android:id="@+id/rightGuide"/>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/editEmail"
+        android:id="@+id/emailCard"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:backgroundTint="@color/black"
@@ -31,6 +31,7 @@
         app:layout_constraintEnd_toEndOf="@id/rightGuide"
         app:layout_constraintTop_toTopOf="parent">
         <EditText
+            android:id="@+id/editEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -42,7 +43,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/editPass"
+        android:id="@+id/passCard"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:backgroundTint="@color/black"
@@ -51,8 +52,9 @@
         android:layout_marginHorizontal="30dp"
         app:layout_constraintStart_toStartOf="@id/leftGuide"
         app:layout_constraintEnd_toEndOf="@id/rightGuide"
-        app:layout_constraintTop_toBottomOf="@id/editEmail">
+        app:layout_constraintTop_toBottomOf="@id/emailCard">
         <EditText
+            android:id="@+id/editPass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -73,7 +75,7 @@
         android:layout_marginHorizontal="100dp"
         app:layout_constraintStart_toStartOf="@id/leftGuide"
         app:layout_constraintEnd_toEndOf="@id/rightGuide"
-        app:layout_constraintTop_toBottomOf="@id/editPass">
+        app:layout_constraintTop_toBottomOf="@id/passCard">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,7 +91,7 @@
         android:text="OR"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/editPass"
+        app:layout_constraintTop_toBottomOf="@id/passCard"
         app:layout_constraintStart_toStartOf="@id/leftGuide"
         app:layout_constraintEnd_toEndOf="@id/rightGuide"
         android:layout_marginTop="100dp"/>
@@ -104,7 +106,7 @@
         android:layout_marginHorizontal="100dp"
         app:layout_constraintStart_toStartOf="@id/leftGuide"
         app:layout_constraintEnd_toEndOf="@id/rightGuide"
-        app:layout_constraintTop_toBottomOf="@id/editPass">
+        app:layout_constraintTop_toBottomOf="@id/passCard">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

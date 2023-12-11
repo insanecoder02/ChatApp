@@ -7,8 +7,8 @@ class User {
 
     constructor() {}
     constructor(name: String?, email: String?, uid: String?) {
-        this.name
-        this.email
-        this.uid
+        this.name = name
+        this.email = email
+        this.uid = uid
     }
 }
