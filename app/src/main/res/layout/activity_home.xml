@@ -7,25 +7,27 @@
     tools:context=".Activity.Home">
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftGuide"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05"
-        android:id="@+id/leftGuide"/>
+        app:layout_constraintGuide_percent="0.05" />
+
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightGuide"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95"
-        android:id="@+id/rightGuide"/>
+        app:layout_constraintGuide_percent="0.95" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userRV"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        tools:listitem="@layout/user_layout"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@id/rightGuide"
         app:layout_constraintStart_toStartOf="@id/leftGuide"
-        app:layout_constraintEnd_toEndOf="@id/rightGuide"/>
-
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/user_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
