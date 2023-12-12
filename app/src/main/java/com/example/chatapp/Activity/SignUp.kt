@@ -19,8 +19,8 @@ class SignUp : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        auth = FirebaseAuth.getInstance()
 
+        auth = FirebaseAuth.getInstance()
         binding.signButton.setOnClickListener {
             signin(
                 binding.editName.text.toString(),
@@ -38,6 +38,7 @@ class SignUp : AppCompatActivity() {
             if (task.isSuccessful) {
                 addUserToDatabase(name, email, auth.currentUser?.uid!!)
                 startActivity(Intent(this@SignUp, Home::class.java))
+                finish()
             } else {
                 Toast.makeText(
                     this@SignUp,

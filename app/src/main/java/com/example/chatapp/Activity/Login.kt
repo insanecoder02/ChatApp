@@ -16,12 +16,10 @@ class Login : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
-
         binding.logButton.setOnClickListener {
             login(
                 binding.editEmail.text.toString(), binding.editPass.text.toString()
             )
-
         }
         binding.signButton.setOnClickListener {
             startActivity(Intent(this, SignUp::class.java))
@@ -34,7 +32,7 @@ class Login : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
                 startActivity(Intent(this, Home::class.java))
-
+                finish()
             } else {
                 Toast.makeText(
                     this@Login,

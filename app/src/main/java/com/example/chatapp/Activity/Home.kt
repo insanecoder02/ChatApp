@@ -32,7 +32,11 @@ class Home : AppCompatActivity() {
                 user.clear()
                 for (postSnapshot in snapshot.children) {
                     val currentUser = postSnapshot.getValue(User::class.java)
-                    user.add(currentUser!!)
+
+                    if(currentUser?.uid != auth.currentUser?.uid){
+                        user.add(currentUser!!)
+                    }
+
                 }
                 binding.userRV.adapter?.notifyDataSetChanged()
             }

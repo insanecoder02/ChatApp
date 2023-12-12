@@ -39,11 +39,13 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="2"
             android:backgroundTint="@color/black"
             app:cardCornerRadius="10dp">
 
-            <TextView
+            <EditText
+                android:id="@+id/chatText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
@@ -56,6 +58,7 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/sendChat"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
