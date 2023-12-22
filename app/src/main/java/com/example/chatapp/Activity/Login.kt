@@ -16,6 +16,11 @@ class Login : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
+
+        if (auth.currentUser != null) {
+            startActivity(Intent(this, Main::class.java))
+            finish()
+        }
         binding.logButton.setOnClickListener {
             login(
                 binding.editEmail.text.toString(), binding.editPass.text.toString()
@@ -31,7 +36,7 @@ class Login : AppCompatActivity() {
     ) {
         auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
-                startActivity(Intent(this, Home::class.java))
+                startActivity(Intent(this, Main::class.java))
                 finish()
             } else {
                 Toast.makeText(

@@ -5,7 +5,6 @@ class Message {
     var uid: String? = null
 
     constructor()
-
     constructor(message: String?, uid: String?) {
         this.message = message
         this.uid = uid

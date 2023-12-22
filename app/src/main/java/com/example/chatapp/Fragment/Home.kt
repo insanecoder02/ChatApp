@@ -1,11 +1,14 @@
-package com.example.chatapp.Activity
+package com.example.chatapp.Fragment
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chatapp.Adapter.UserAdapter
 import com.example.chatapp.ArrayList.User
-import com.example.chatapp.databinding.ActivityHomeBinding
+import com.example.chatapp.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -13,16 +16,21 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class Home : AppCompatActivity() {
-
-    private lateinit var binding: ActivityHomeBinding
+class Home : Fragment() {
     private lateinit var user: ArrayList<User>
     private lateinit var auth: FirebaseAuth
     private lateinit var db: DatabaseReference
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    private lateinit var binding:FragmentHomeBinding
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         auth = FirebaseAuth.getInstance()
 
@@ -36,7 +44,6 @@ class Home : AppCompatActivity() {
                     if(currentUser?.uid != auth.currentUser?.uid){
                         user.add(currentUser!!)
                     }
-
                 }
                 binding.userRV.adapter?.notifyDataSetChanged()
             }
@@ -46,7 +53,8 @@ class Home : AppCompatActivity() {
 
         })
         user = ArrayList()
-        binding.userRV.adapter = UserAdapter(this, user)
-        binding.userRV.layoutManager = LinearLayoutManager(this)
+        binding.userRV.adapter = UserAdapter(requireContext(), user)
+        binding.userRV.layoutManager = LinearLayoutManager(requireContext())
+
     }
 }

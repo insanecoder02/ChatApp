@@ -6,29 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".Activity.ChatActivity">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/leftGuide"
+    <Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        android:layout_height="50dp"
+        android:layout_gravity="top"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/rightGuide"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+        <TextView
+            android:id="@+id/toolName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User name"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginRight="10dp"/>
+    </Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRv"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@id/rightGuide"
-        app:layout_constraintStart_toStartOf="@id/leftGuide"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="0dp"
+        android:paddingHorizontal="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:listitem="@layout/reciever_layout"/>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -50,7 +60,9 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:hint="Type your message"
-                android:padding="5dp"
+                android:padding="10dp"
+                android:lineBreakStyle="strict"
+                android:lineBreakWordStyle="phrase"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:textSize="16sp" />

@@ -28,10 +28,17 @@ class ChatActivity : AppCompatActivity() {
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.chatRv.adapter = MessageAdapter(this, messageList)
+        binding.chatRv.layoutManager = LinearLayoutManager(this).apply {
+            stackFromEnd = true
+        }
+
         db = FirebaseDatabase.getInstance().getReference()
         val name = intent.getStringExtra("name")
         val reciverUid = intent.getStringExtra("uid")
         val senderUid = FirebaseAuth.getInstance().currentUser?.uid
+
+        binding.toolName.text = name
         senderRoom = reciverUid + senderUid
         recieverRoom = senderUid + reciverUid
         supportActionBar?.title = name
@@ -60,7 +67,5 @@ class ChatActivity : AppCompatActivity() {
                 }
             binding.chatText.setText("")
         }
-        binding.chatRv.adapter = MessageAdapter(this, messageList)
-        binding.chatRv.layoutManager = LinearLayoutManager(this)
     }
 }

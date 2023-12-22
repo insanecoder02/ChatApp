@@ -16,7 +16,7 @@
             android:name=".Activity.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.Home"
+            android:name=".Activity.Main"
             android:exported="false" />
         <activity
             android:name=".Activity.SignUp"

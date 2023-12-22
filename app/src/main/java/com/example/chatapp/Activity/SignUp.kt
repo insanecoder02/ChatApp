@@ -37,7 +37,7 @@ class SignUp : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
                 addUserToDatabase(name, email, auth.currentUser?.uid!!)
-                startActivity(Intent(this@SignUp, Home::class.java))
+                startActivity(Intent(this@SignUp, Main::class.java))
                 finish()
             } else {
                 Toast.makeText(
