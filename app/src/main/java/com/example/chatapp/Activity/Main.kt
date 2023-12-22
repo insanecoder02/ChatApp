@@ -2,6 +2,7 @@ package com.example.chatapp.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.chatapp.Fragment.Call
 import com.example.chatapp.Fragment.Home
@@ -11,6 +12,7 @@ import com.example.chatapp.databinding.ActivityMainBinding
 
 class Main : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private var currentFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +29,11 @@ class Main : AppCompatActivity() {
         }
         loadFragment(Home())
     }
+
     private fun loadFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commit()
+        if (currentFragment !== fragment) {
+            currentFragment = fragment
+            supportFragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commit()
+        }
     }
 }

@@ -10,6 +10,7 @@
         android:icon="@drawable/call"/>
 
     <item android:id="@+id/profile"
-        android:title="Profile"/>
+        android:title="Profile"
+        android:icon="@drawable/account"/>
 
 </menu>

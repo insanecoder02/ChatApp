@@ -1,14 +1,11 @@
 package com.example.chatapp.Activity
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chatapp.Adapter.MessageAdapter
 import com.example.chatapp.ArrayList.Message
 import com.example.chatapp.databinding.ActivityChatBinding
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -28,6 +25,8 @@ class ChatActivity : AppCompatActivity() {
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        messageList = ArrayList()
+
         binding.chatRv.adapter = MessageAdapter(this, messageList)
         binding.chatRv.layoutManager = LinearLayoutManager(this).apply {
             stackFromEnd = true
@@ -42,7 +41,6 @@ class ChatActivity : AppCompatActivity() {
         senderRoom = reciverUid + senderUid
         recieverRoom = senderUid + reciverUid
         supportActionBar?.title = name
-        messageList = ArrayList()
         db.child("chats").child(senderRoom!!).child("messages")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -57,15 +55,23 @@ class ChatActivity : AppCompatActivity() {
                 override fun onCancelled(error: DatabaseError) {
                 }
             })
-        binding.sendChat.setOnClickListener {
-            val messageObject = Message(binding.chatText.text.toString(), senderUid)
 
-            db.child("chats").child(senderRoom!!).child("messages").push().setValue(messageObject)
-                .addOnSuccessListener {
-                    db.child("chats").child(recieverRoom!!).child("messages").push()
-                        .setValue(messageObject)
-                }
-            binding.chatText.setText("")
+        binding.sendChat.setOnClickListener {
+            val messageText = binding.chatText.text.toString().trim()
+            if (messageText.isNotEmpty()) {
+                val messageObject = Message(binding.chatText.text.toString(), senderUid)
+
+                db.child("chats").child(senderRoom!!).child("messages").push()
+                    .setValue(messageObject)
+                    .addOnSuccessListener {
+                        db.child("chats").child(recieverRoom!!).child("messages").push()
+                            .setValue(messageObject)
+                        MessageAdapter(this, messageList).notifyItemInserted(messageList.size - 1)
+                        binding.chatRv.smoothScrollToPosition(messageList.size - 1)
+                    }
+                binding.chatText.setText("")
+            }
+
         }
     }
 }
