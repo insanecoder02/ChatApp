@@ -26,7 +26,8 @@ class SignUp : AppCompatActivity() {
     private lateinit var storage: FirebaseStorage
     private lateinit var storageRef: StorageReference
     private val PICK_IMAGE_REQUEST = 1
-    private var selectedImageUri:Uri?=null
+    private var selectedImageUri: Uri? = Uri.parse("android.resource://com.example.chatapp.Activity/" + R.drawable.account)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +46,6 @@ class SignUp : AppCompatActivity() {
             val email = binding.editEmail.text.toString()
             val pass = binding.editPass.text.toString()
 
-            if (selectedImageUri != null) {
                 // If an image is selected, proceed with sign-in
                 val imageName = UUID.randomUUID().toString()
                 val imageRef = storageRef.child("images/$imageName.jpg")
@@ -70,10 +70,6 @@ class SignUp : AppCompatActivity() {
                         Toast.makeText(this, "Image upload failed", Toast.LENGTH_SHORT).show()
                     }
                 }
-            } else {
-                // If no image is selected, show an error message or handle it accordingly
-                Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show()
-            }
         }
 
         binding.logButton.setOnClickListener {
@@ -89,58 +85,60 @@ class SignUp : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
-            selectedImageUri = data.data
+            val imageUri = data.data
+            if (imageUri != null) {
+                selectedImageUri = imageUri
+                val imageName = UUID.randomUUID().toString()
 
-//            val imageName = UUID.randomUUID().toString()
-//
-//            val imageRef = storageRef.child("images/$imageName.jpg")
-//            val uploadTask = imageRef.putFile(selectedImageUri!!)
-//
-//            uploadTask.continueWithTask { task ->
-//                if (!task.isSuccessful) {
-//                    task.exception?.let {
-//                        throw it
-//                    }
-//                }
-//                imageRef.downloadUrl
-//            }.addOnCompleteListener { task ->
-//                if (task.isSuccessful) {
-//                    val downloadUri = task.result
-//                    addUserToDatabase(
-//                        binding.editName.text.toString(),
-//                        binding.editEmail.text.toString(),
-//                        auth.currentUser?.uid!!,
-//                        downloadUri!!.toString()
-//                    )
-//                } else {
-//                    // Handle failures
-//                    Toast.makeText(this, "Image upload failed", Toast.LENGTH_SHORT).show()
-//                }
+                val imageRef = storageRef.child("images/$imageName.jpg")
+                val uploadTask = imageRef.putFile(selectedImageUri!!)
 
-                Glide.with(this)
-                    .load(selectedImageUri)
-                    .placeholder(R.drawable.account)
-                    .error(R.drawable.ic_launcher_foreground)
-                    .apply(RequestOptions().override(300, 300)) // Adjust the size as needed
-                    .into(binding.userImage)
-            }
-        }
+                uploadTask.continueWithTask { task ->
+                    if (!task.isSuccessful) {
+                        task.exception?.let {
+                            throw it
+                        }
+                    }
+                    imageRef.downloadUrl
+                }.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val downloadUri = task.result
+                        Glide.with(this)
+                            .load(selectedImageUri)
+                            .placeholder(R.drawable.account)
+                            .circleCrop()
+                            .error(R.drawable.ic_launcher_foreground)
+                            .apply(RequestOptions().override(300, 300)) // Adjust the size as needed
+                            .into(binding.userImage)
 
-    private fun signin(name: String, email: String, pass: String,image:String) {
-        auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(this) { task ->
-            if (task.isSuccessful) {
-                addUserToDatabase(name, email, auth.currentUser?.uid!!,image)
-                startActivity(Intent(this@SignUp, Main::class.java))
-                finish()
+                        // Continue with your logic here, if needed
+                    } else {
+                        // Handle failures
+                        Toast.makeText(this, "Image upload failed", Toast.LENGTH_SHORT).show()
+                    }
+                }
             } else {
-                Toast.makeText(
-                    this@SignUp,
-                    task.exception?.localizedMessage,
-                    Toast.LENGTH_SHORT,
-                ).show()
+                Toast.makeText(this, "Failed to retrieve image", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
+
+    private fun signin(name: String, email: String, pass: String, image: String) {
+            auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    addUserToDatabase(name, email, auth.currentUser?.uid!!, image)
+                    startActivity(Intent(this@SignUp, Main::class.java))
+                    finish()
+                } else {
+                    Toast.makeText(
+                        this@SignUp,
+                        task.exception?.localizedMessage,
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                }
+            }
+        }
 
     private fun addUserToDatabase(name: String, email: String, uid: String, imageUrl:String) {
         db = FirebaseDatabase.getInstance().getReference()

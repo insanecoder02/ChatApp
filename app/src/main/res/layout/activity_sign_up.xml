@@ -22,9 +22,9 @@
 
     <ImageView
         android:id="@+id/userImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_background"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/account"
         app:layout_constraintBottom_toTopOf="@+id/nameCard"
         app:layout_constraintEnd_toStartOf="@+id/rightGuide"
         app:layout_constraintStart_toStartOf="@+id/leftGuide"

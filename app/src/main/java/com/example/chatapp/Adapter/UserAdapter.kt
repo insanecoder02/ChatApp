@@ -31,15 +31,20 @@ class UserAdapter(val context: Context, val userList: ArrayList<User>) :
         holder.UserName.text = currentUser.name
         Glide.with(context)
             .load(currentUser.imageUri)
+            .circleCrop()
             .placeholder(R.drawable.account)
             .into(holder.UserImg)
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(context,ChatActivity::class.java)
-            intent.putExtra("name",currentUser.name)
-            intent.putExtra("uid",currentUser.uid)
-            intent.putExtra("img",currentUser.imageUri)
+            val intent = Intent(context, ChatActivity::class.java)
+            intent.putExtra("name", currentUser.name)
+            intent.putExtra("uid", currentUser.uid)
+            intent.putExtra("img", currentUser.imageUri)
             context.startActivity(intent)
+        }
+
+        holder.UserImg.setOnClickListener {
+//            implement the logic
         }
     }
 
