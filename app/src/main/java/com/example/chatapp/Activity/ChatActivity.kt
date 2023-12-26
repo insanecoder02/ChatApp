@@ -57,9 +57,10 @@ class ChatActivity : AppCompatActivity() {
             })
 
         binding.sendChat.setOnClickListener {
+            val currentTimeMillis = System.currentTimeMillis()
             val messageText = binding.chatText.text.toString().trim()
             if (messageText.isNotEmpty()) {
-                val messageObject = Message(binding.chatText.text.toString(), senderUid)
+                val messageObject = Message(binding.chatText.text.toString(), senderUid,currentTimeMillis)
 
                 db.child("chats").child(senderRoom!!).child("messages").push()
                     .setValue(messageObject)

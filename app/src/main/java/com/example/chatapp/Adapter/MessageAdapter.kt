@@ -4,12 +4,17 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
 import com.example.chatapp.ArrayList.Message
 import com.example.chatapp.R
 import com.google.firebase.auth.FirebaseAuth
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class MessageAdapter(val context: Context, val message: ArrayList<Message>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -35,9 +40,16 @@ class MessageAdapter(val context: Context, val message: ArrayList<Message>) :
         if (holder.javaClass == SenderViewHolder::class.java) {
             val viewHolder = holder as SenderViewHolder
             holder.sentMessage.text = currentMessage.message
+            Glide.with(context).load(R.drawable.account).into(holder.sentImg)
+
+            val formattedTime = currentMessage.time?.let {Date(it)}?.let { SimpleDateFormat("HH:mm", Locale.getDefault()).format(it) }
+            holder.sendTime.text = formattedTime
         } else {
             val viewHolder = holder as RecieverViewHolder
             holder.reciverMessage.text = currentMessage.message
+            Glide.with(context).load(R.drawable.account).into(holder.recImg)
+            val formattedTime = currentMessage.time?.let {Date(it)}?.let { SimpleDateFormat("HH:mm", Locale.getDefault()).format(it) }
+            holder.recTime.text = formattedTime
         }
     }
 
@@ -53,11 +65,16 @@ class MessageAdapter(val context: Context, val message: ArrayList<Message>) :
 
     class SenderViewHolder(itemView: View) : ViewHolder(itemView) {
         val sentMessage = itemView.findViewById<TextView>(R.id.senderMessage)
+        val sentImg: ImageView = itemView.findViewById(R.id.senderImage)
+        val sendTime: TextView = itemView.findViewById(R.id.sendertime)
+
 
     }
 
     class RecieverViewHolder(itemView: View) : ViewHolder(itemView) {
         val reciverMessage = itemView.findViewById<TextView>(R.id.recieverMessage)
+        val recImg: ImageView = itemView.findViewById(R.id.recieverImage)
+        val recTime: TextView = itemView.findViewById(R.id.rectime)
     }
 
 }

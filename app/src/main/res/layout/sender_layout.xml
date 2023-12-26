@@ -20,23 +20,34 @@
         android:backgroundTint="#512DA8"
         app:cardCornerRadius="10dp"
         app:cardUseCompatPadding="true"
-        android:layout_marginLeft="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/senderImage"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginRight="2dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/senderMessage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="206dp"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:hint="This is senders message"
             android:padding="2dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/sendertime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="time"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:layout_gravity="end|bottom"
+            android:textSize="12sp" />
     </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

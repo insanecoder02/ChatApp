@@ -30,7 +30,7 @@ class UserAdapter(val context: Context, val userList: ArrayList<User>) :
         val currentUser = userList[position]
         holder.UserName.text = currentUser.name
         Glide.with(context)
-            .load(currentUser.imageUri)
+            .load(R.drawable.account)
             .circleCrop()
             .placeholder(R.drawable.account)
             .into(holder.UserImg)
@@ -39,7 +39,6 @@ class UserAdapter(val context: Context, val userList: ArrayList<User>) :
             val intent = Intent(context, ChatActivity::class.java)
             intent.putExtra("name", currentUser.name)
             intent.putExtra("uid", currentUser.uid)
-            intent.putExtra("img", currentUser.imageUri)
             context.startActivity(intent)
         }
 

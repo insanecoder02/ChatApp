@@ -19,10 +19,9 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#7B1FA2"
         app:cardCornerRadius="10dp"
-        android:layout_marginRight="150dp"
         app:cardUseCompatPadding="true"
+        android:layout_marginLeft="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/recieverImage"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
@@ -37,6 +36,17 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/rectime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="time"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:layout_gravity="end|bottom"
+            android:textSize="12sp" />
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
