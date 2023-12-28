@@ -7,6 +7,9 @@
     <item android:id="@+id/calls"
         android:icon="@drawable/call"/>
 
+    <item android:id="@+id/contact"
+        android:icon="@drawable/contact"/>
+
     <item android:id="@+id/profile"
         android:icon="@drawable/account"/>
 

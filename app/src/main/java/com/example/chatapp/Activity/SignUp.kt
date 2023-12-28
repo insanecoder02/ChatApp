@@ -42,10 +42,6 @@ class SignUp : AppCompatActivity() {
 //        }
 
         binding.signButton.setOnClickListener {
-            val name = binding.editName.text.toString()
-            val email = binding.editEmail.text.toString()
-            val pass = binding.editPass.text.toString()
-
                 // If an image is selected, proceed with sign-in
 //                val imageName = UUID.randomUUID().toString()
 //                val imageRef = storageRef.child("images/$imageName.jpg")
@@ -64,7 +60,7 @@ class SignUp : AppCompatActivity() {
 //                        val imageUrl = downloadUri.toString()
 
                         // Call the signin function with the imageUrl
-                        signin(name, email, pass)
+                        signin(binding.editName.text.toString(), binding.editEmail.text.toString(),binding.editPass.text.toString())
 //                    } else /
                         // Handle failures
 //                        Toast.makeText(this, "Image upload failed", Toast.LENGTH_SHORT).show()

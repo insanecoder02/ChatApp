@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.chatapp.Fragment.Call
+import com.example.chatapp.Fragment.Contact
 import com.example.chatapp.Fragment.Home
 import com.example.chatapp.Fragment.Profile
 import com.example.chatapp.R
@@ -24,6 +25,7 @@ class Main : AppCompatActivity() {
                 R.id.calls -> loadFragment(Call())
                 R.id.chat -> loadFragment(Home())
                 R.id.profile -> loadFragment(Profile())
+                R.id.contact -> loadFragment(Contact())
             }
             true
         }
