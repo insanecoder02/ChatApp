@@ -74,5 +74,9 @@ class ChatActivity : AppCompatActivity() {
             }
 
         }
+
+        binding.backBut.setOnClickListener {
+            finish()
+        }
     }
 }

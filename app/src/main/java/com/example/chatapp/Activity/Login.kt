@@ -22,9 +22,11 @@ class Login : AppCompatActivity() {
             finish()
         }
         binding.logButton.setOnClickListener {
+            if(binding.editEmail.text.toString().trim()!=null && binding.editPass.text.toString().trim()!=null)
             login(
                 binding.editEmail.text.toString(), binding.editPass.text.toString()
             )
+            return@setOnClickListener
         }
         binding.signButton.setOnClickListener {
             startActivity(Intent(this, SignUp::class.java))
